@@ -1,9 +1,12 @@
 torch
 torchvision
+onnx
+onnxruntime
 numpy
 Pillow
+opencv-python
 cerebrium
 fastapi
 uvicorn
-opencv-python
-transformers
+requests
+pytest
