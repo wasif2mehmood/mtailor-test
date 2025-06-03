@@ -1,12 +1,33 @@
-# ONNX Image Classifier - Cerebrium Deployment
+# ONNX Image Classifier - FastAPI & Cerebrium Deployment
 
-A FastAPI-based image classification service using ONNX models, deployable on Cerebrium cloud platform.
+A FastAPI-based image classification service using ONNX models, runnable locally and deployable on Cerebrium cloud platform.
 
-## 🚀 Quick Start
+## ☁️ Deploying to Cerebrium
+
+### 1. Install Cerebrium CLI
+```bash
+pip install cerebrium
+```
+
+### 2. Login to Cerebrium
+```bash
+cerebrium login
+```
+
+### 3. Deploy to Cerebrium
+```bash
+python -m cerebrium deploy --disable-syntax-check
+```
+
+### 4. Test Deployment
+```bash
+python test_server.py
+```
+
+## 🖥️ Running Locally with FastAPI
 
 ### Prerequisites
 - Python 3.9+
-- Cerebrium account
 - ONNX model file (`model.onnx`)
 - Test images
 
@@ -15,23 +36,46 @@ A FastAPI-based image classification service using ONNX models, deployable on Ce
 pip install -r requirements.txt
 ```
 
-### 2. Login to Cerebrium
+### 2. Start Local FastAPI Server
 ```bash
-cerebrium login
-```
-Follow the prompts to authenticate with your Cerebrium account.
-
-### 3. Deploy to Cerebrium
-```bash
-python -m cerebrium deploy --disable-syntax-check
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The `--disable-syntax-check` flag bypasses linting issues during deployment.
-
-### 4. Test Your Deployment
+**Alternative commands:**
 ```bash
-python test_server.py
+# Basic server (no auto-reload)
+uvicorn main:app --host 0.0.0.0 --port 8000
+
+# Custom port
+uvicorn main:app --reload --host 0.0.0.0 --port 8001
+
+# Development with debug logs
+uvicorn main:app --reload --host 0.0.0.0 --port 8000 --log-level debug
 ```
+
+### 3. Access Your API
+- **API Documentation:** http://localhost:8000/docs
+- **Health Check:** http://localhost:8000/health
+- **Model Info:** http://localhost:8000/model-info
+
+### 4. Test Local API
+```bash
+# Health check
+curl -X GET "http://localhost:8000/health"
+
+# Single prediction
+curl -X POST "http://localhost:8000/predict" \
+  -F "file=@n01440764_tench.JPEG"
+
+# Top-k predictions
+curl -X POST "http://localhost:8000/predict-top-k?k=5" \
+  -F "file=@n01440764_tench.JPEG"
+```
+
+
+---
+
+
 
 ## 📁 Project Structure
 
