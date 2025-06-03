@@ -1,9 +1,9 @@
 import onnxruntime as ort
 import numpy as np
 from PIL import Image
-import cv2
-from typing import Union, Tuple, List
+from typing import Tuple, List
 import logging
+import os
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

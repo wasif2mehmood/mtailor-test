@@ -1,7 +1,6 @@
 import torch
 import torch.onnx
 from pytorch_model import Classifier, BasicBlock
-import numpy as np
 
 def convert_pytorch_to_onnx():
     """

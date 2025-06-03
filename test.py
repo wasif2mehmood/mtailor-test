@@ -41,7 +41,7 @@ def simple_inference_test():
             result = classifier.classify_image(image_path)
             
             # Print results
-            print(f" Classification successful!")
+            print(" Classification successful!")
             print(f"   Class ID: {result['class_id']}")
             print(f"   Class Name: {result['class_name']}")
             print(f"   Confidence: {result['confidence']:.4f}")
